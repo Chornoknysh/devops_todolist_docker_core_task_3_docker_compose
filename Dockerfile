@@ -1,12 +1,14 @@
-# Django-Todolist Docker Setup
+FROM python:3.8
 
-1.
-   ```bash
-   git clone <your-fork-url>
-   cd Django-Todolist
+# Встановлюємо робочу директорію
+WORKDIR /app
 
-docker-compose up --build
+# Копіюємо requirements.txt і встановлюємо залежності
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
 
-http://localhost:8000
+# Копіюємо весь проект
+COPY . .
 
-docker-compose down
+# Відкриваємо порт
+EXPOSE 8000
