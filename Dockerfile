@@ -1,14 +1,12 @@
 FROM python:3.8
 
-# Встановлюємо робочу директорію
 WORKDIR /app
 
-# Копіюємо requirements.txt і встановлюємо залежності
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Копіюємо весь проект
 COPY . .
 
-# Відкриваємо порт
 EXPOSE 8000
+
+ENTRYPOINT ["sh", "-c", "python manage.py migrate && python manage.py runserver 0.0.0.0:8000"]
